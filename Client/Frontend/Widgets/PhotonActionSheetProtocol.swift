@@ -32,13 +32,6 @@ extension PhotonActionSheetProtocol {
     //Returns a list of actions which is used to build a menu
     //parameter OpenURL is a closure that can open a given URL in some view controller. It is up to the class using the menu to know how to open the url
     func getHomePanelActions(openURL: @escaping (URL) -> Void, vcDelegate: PageOptionsVC) -> [PhotonActionSheetItem] {
-        let openQR = PhotonActionSheetItem(title: Strings.ScanQRCodeViewTitle, iconString: "menu-ScanQRCode") { action in
-            let qrCodeViewController = QRCodeViewController()
-            qrCodeViewController.qrCodeDelegate = vcDelegate
-            let controller = UINavigationController(rootViewController: qrCodeViewController)
-            vcDelegate.present(controller, animated: true, completion: nil)
-        }
-        
         let openSettings = PhotonActionSheetItem(title: Strings.AppMenuSettingsTitleString, iconString: "menu-Settings") { action in
             let settingsTableViewController = AppSettingsTableViewController()
             settingsTableViewController.profile = self.profile
@@ -67,7 +60,7 @@ extension PhotonActionSheetProtocol {
             openURL(HomePanelType.readingList.localhostURL)
         }
         
-        return [openQR, openSettings, openTopSites, openBookmarks, openHistory, openReadingList]
+        return [openSettings, openTopSites, openBookmarks, openHistory, openReadingList]
     }
     
     /*
